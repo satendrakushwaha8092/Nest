@@ -19,8 +19,13 @@ export class UsersService {
     return this.userModel.find().exec()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findByUserId(req:any) {
+    const userId = req['user']['userId'];
+    return this.userModel.findOne({userId:userId}).exec();
+  }
+
+  findOne(email: string) {
+    return this.userModel.findOne({email:email}).exec()
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

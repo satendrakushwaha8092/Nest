@@ -6,6 +6,10 @@ import { ItemsModule } from './items/items.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Connection } from 'mongoose';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './auth/auth.guard';
+import { RolesGuard } from './role/roles.guard';
 
 @Module({
   imports: [CatsModule, ItemsModule, MongooseModule.forRoot('mongodb+srv://satendra:9HvzULR2cMGCr7dq@cluster0.ad4z5qw.mongodb.net/crud?retryWrites=true&w=majority&appName=Cluster0',
@@ -18,8 +22,17 @@ import { UsersModule } from './users/users.module';
   
       return connection;}
     },
-  ), UsersModule],
+  ), UsersModule, AuthModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService
+    ,{
+    provide: APP_GUARD,
+    useClass: AuthGuard,
+  },
+  {
+    provide: APP_GUARD,
+    useClass: RolesGuard, // Global role-based access guard
+  },
+],
 })
 export class AppModule {}
