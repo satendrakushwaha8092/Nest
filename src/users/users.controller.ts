@@ -2,7 +2,6 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Put, Request, UseGua
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { AuthGuard } from 'src/auth/auth.guard';
 import { Role } from 'src/enums/role.enum';
 import { Roles } from 'src/role/roles.decorator';
 

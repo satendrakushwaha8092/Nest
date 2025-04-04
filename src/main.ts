@@ -9,7 +9,7 @@ async function bootstrap() {
     //   json: true,
     // }),
   })
-
+  app.enableCors();
   const config = new DocumentBuilder()
     .setTitle('User Service')
     .setDescription('The user API description')
